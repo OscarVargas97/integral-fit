@@ -1,8 +1,9 @@
 'use client'
 import Link from 'next/link'
 import LoginLogoutButton from 'components/buttons/LoginLogout'
+import { type User } from '@supabase/supabase-js'
 
-const Navbar = ({ user }) => {
+const Navbar: React.FC<{ user: User | null }> = ({ user }) => {
   return (
     <div className="relative z-10 w-full max-w-7xl font-mono text-sm flex justify-between items-center p-4 mx-auto">
       <div className="flex-grow"></div>
