@@ -1,0 +1,82 @@
+/* General: Reducir el tamaño general del calendario */
+.rbc-calendar {
+    font-size: 11px;
+}
+
+/* Reducir el tamaño de las celdas horarias */
+.rbc-time-slot {
+    height: 10px;
+    border-top: none;
+    /* Quitar líneas superiores */
+}
+
+/* Personalizar cabecera de días */
+.rbc-header {
+    padding: 2px 5px;
+    font-size: 10px;
+    color: #666;
+    background-color: #fafafa;
+    border-bottom: none;
+    /* Quitar líneas inferiores */
+}
+
+/* Hacer que las horas sean menos prominentes */
+.rbc-time-content .rbc-timeslot-group {
+    border-color: transparent;
+    /* Hacer líneas invisibles */
+}
+
+.rbc-time-content .rbc-label {
+    color: #aaa;
+    font-size: 10px;
+}
+
+/* Estilo de los eventos para que sean más pequeños */
+.rbc-event {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Reducir tamaño y padding de los títulos */
+.rbc-toolbar {
+    font-size: 10px;
+    padding: 2px 5px;
+}
+
+.rbc-events-container{
+    width: 100%;
+}
+
+/* Ajustar selección de rangos */
+.rbc-selected-cell {
+    background-color: rgba(0, 123, 255, 0.2);
+}
+
+/* Bordes menos intrusivos */
+.rbc-time-grid {
+    border: none;
+    /* Quitar bordes */
+}
+
+/* Ajustar el estilo de líneas */
+.rbc-time-gutter {
+    border-right: none;
+    /* Quitar líneas del margen izquierdo */
+}
+
+.rbc-current-time-indicator {
+    background-color: #ff8080;
+}
+
+/* Compactar días */
+.rbc-row {
+    padding: 2px 0;
+    border: none;
+    /* Quitar bordes */
+}

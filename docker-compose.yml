@@ -1,0 +1,27 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev                 # Usa la etapa 'dev' del Dockerfile
+    image: react-app:${PROJECT_NAME}
+    container_name: ${PROJECT_NAME}_web
+    ports:
+      - "3000:3000"    
+    volumes:
+      - .:/app
+      - /usr/share/HOStudios/devironment/container/fonts:/usr/share/fonts
+      - /usr/share/HOStudios/devironment/container/zsh-sudo/:/usr/share/zsh-sudo/
+      - /usr/share/HOStudios/devironment/container/powerlevel10k:/home/node/powerlevel10k
+      - /usr/share/HOStudios/devironment/container/home/:/home/node/
+      - ${HOME}/.ssh:/home/node/.ssh
+      - /var/run/docker.sock:/var/run/docker.sock
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    env_file:
+      - .env                     # Variables de entorno desde archivo .env
+    environment:
+      NODE_ENV: development       
+    command: >
+        sh -c "tail -f /dev/null"
+    
