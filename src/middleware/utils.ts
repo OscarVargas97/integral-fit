@@ -6,8 +6,8 @@ export const redirectToHome = (request: NextRequest) => {
   return NextResponse.redirect(url)
 }
 
-export const redirectToLogOut = (request: NextRequest) => {
+export const redirectTo = (request: NextRequest, path: string) => {
   const url = request.nextUrl.clone()
-  url.pathname = '/logout'
+  url.pathname = path
   return NextResponse.redirect(url)
 }
