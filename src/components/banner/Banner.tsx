@@ -13,7 +13,7 @@ interface BannerProps {
   }
 }
 
-const Banner: FC<BannerProps> = ({
+const Banner: React.FC<BannerProps> = ({
   backgroundImage,
   children,
   content,
