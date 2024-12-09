@@ -1,8 +1,19 @@
 import BannerWrapper from './BannerWrapper'
 import BannerContent from './BannerContent'
 import BannerBackgroundEffects from './BannerBackgroundEffects'
+import React from 'react'
 
-const Banner = ({
+interface BannerProps {
+  backgroundImage: string // Ajusta este tipo según lo que necesites (puede ser una URL o algún otro formato).
+  children?: React.ReactNode
+  content?: React.ReactNode
+  textAlign?: {
+    text: 'left' | 'center' | 'right'
+    vertical: 'top' | 'center' | 'bottom'
+  }
+}
+
+const Banner: FC<BannerProps> = ({
   backgroundImage,
   children,
   content,
