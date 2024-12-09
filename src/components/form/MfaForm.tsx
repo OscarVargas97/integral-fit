@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { mfaAuth } from 'lib/supabase/auth'
 
 const MfaForm = () => {
   const router = useRouter()
@@ -9,18 +10,21 @@ const MfaForm = () => {
   const [error, setError] = useState(false)
 
   const handleChange = (index, value) => {
-    if (value.length > 1) return
+    // Solo aceptar caracteres numéricos
+    if (!/^\d?$/.test(value)) return
 
     const updatedValues = [...values]
-    // Si el valor está vacío, reubicar los números restantes
+
     if (!value) {
+      // Si el valor está vacío, eliminar en cascada
       for (let i = index; i < values.length - 1; i++) {
         updatedValues[i] = updatedValues[i + 1]
       }
       updatedValues[values.length - 1] = '' // Último campo vacío
     } else {
-      updatedValues[index] = value.replace(/\D/, '')
+      updatedValues[index] = value
     }
+
     setValues(updatedValues)
 
     // Cambiar el foco solo si se ingresa un valor válido
@@ -29,15 +33,53 @@ const MfaForm = () => {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleKeyDown = (index, e) => {
+    if (e.key === 'Backspace' && values[index] === '') {
+      const updatedValues = [...values]
+      // Si el valor está vacío, mover valores hacia la izquierda
+      for (let i = index; i < values.length - 1; i++) {
+        updatedValues[i] = updatedValues[i + 1]
+      }
+      updatedValues[values.length - 1] = '' // Último campo vacío
+      setValues(updatedValues)
+
+      // Cambiar el foco al anterior si no es el primero
+      if (index > 0) {
+        document.getElementById(`input-${index - 1}`).focus()
+      }
+    }
+  }
+
+  const handlePaste = (e) => {
+    e.preventDefault()
+
+    const clipboardData = e.clipboardData.getData('text')
+    const numbers = clipboardData.replace(/\D/g, '') // Extraer solo números
+
+    if (numbers.length === 0) return
+
+    const updatedValues = [...values]
+    let index = 0
+
+    for (let i = 0; i < values.length && index < numbers.length; i++) {
+      if (updatedValues[i] === '') {
+        updatedValues[i] = numbers[index]
+        index++
+      }
+    }
+
+    setValues(updatedValues)
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (values.some((val) => val === '')) {
       setError(true)
       return
     }
+    const otp = values.join('')
     setError(false)
-    console.log('Código ingresado:', values.join(''))
-    router.push('/first-steps')
+    await mfaAuth(e, router, otp)
   }
 
   return (
@@ -56,6 +98,10 @@ const MfaForm = () => {
             onChange={(e) => {
               handleChange(index, e.target.value)
             }}
+            onKeyDown={(e) => {
+              handleKeyDown(index, e)
+            }}
+            onPaste={handlePaste}
             className="w-12 h-12 text-center text-lg border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         ))}

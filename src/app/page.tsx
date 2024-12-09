@@ -31,9 +31,11 @@ export default async function Home() {
           >
             Ver planes
           </ScrollButton>
-          <TransitionLink href="/signup" variant="default">
-            Unirme al cambio
-          </TransitionLink>
+          {!user && (
+            <TransitionLink href="/access/signup" variant="default">
+              Unirme al cambio
+            </TransitionLink>
+          )}
         </Banner>
         <Plans id="plans-section" className="mt-12" />
       </div>

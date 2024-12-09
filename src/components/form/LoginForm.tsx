@@ -4,33 +4,18 @@ import Link from 'next/link'
 import { Button } from 'components/ui/Button'
 import { Input } from 'components/ui/Input'
 import { Label } from 'components/ui/Label'
-import { createClient } from 'lib/supabase/client'
-import { animations } from 'components/transitions/animations'
+
 import { useRouter } from 'next/navigation'
+import { login } from 'lib/supabase/auth'
 
 const LoginForm = () => {
   const router = useRouter()
-
-  const login = async (e) => {
-    e.preventDefault() // Previene el comportamiento por defecto del formulario
-
-    const { error } = await createClient().auth.signInWithPassword({
-      email: e.target.email.value,
-      password: e.target.password.value,
-    })
-
-    if (error) {
-      console.error('Error during login:', error.message)
-    } else {
-      console.log('Login successful')
-    }
-    await animations.default.preTransition()
-    router.push('/2fa')
-    await animations.default.posTransition()
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    login(e, router)
   }
-
   return (
-    <form onSubmit={login}>
+    <form onSubmit={handleLogin}>
       <div className="grid gap-4">
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>

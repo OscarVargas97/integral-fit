@@ -13,7 +13,6 @@ const useSteps = () => {
     }
     setError('')
     setStep((prev) => prev + 1)
-    console.log('Datos enviados:', currentData)
   }
 
   const handlePrev = () => {
@@ -22,7 +21,6 @@ const useSteps = () => {
 
   const handleSubmit = (e, fields) => {
     e.preventDefault()
-    console.log('Datos enviados:', fields)
   }
 
   const handleInputChange = (e) => {
