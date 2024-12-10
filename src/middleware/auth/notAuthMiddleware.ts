@@ -1,6 +1,6 @@
 import { redirectTo } from 'middleware/utils'
 
-const NotAuthMiddleware = (supabaseClient, request) => {
+const NotAuthMiddleware = async (supabaseClient, request) => {
   const publicUrls = ['/access', '/error', '/api/access', '/api/access/2fa']
   const exceptions = '/access/2fa'
   if (request.nextUrl.pathname === exceptions) {
