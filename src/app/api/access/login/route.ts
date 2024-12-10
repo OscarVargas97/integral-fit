@@ -1,10 +1,9 @@
-import { createClient } from 'lib/supabase/client'
 import { NextResponse } from 'next/server'
 import { login } from 'lib/supabase/auth-server'
 
 export async function POST(req) {
   const body = await req.json()
-  const { email, password } = body
+  const { email, password }: { email: string; password: string } = body
 
   if (!email || !password) {
     return NextResponse.json(

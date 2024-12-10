@@ -3,7 +3,7 @@ import { mfaVerify } from 'lib/supabase/auth-server'
 
 export async function POST(req) {
   const body = await req.json()
-  const { otp } = body
+  const { otp }: { otp: string } = body
 
   if (!otp) {
     return NextResponse.json({ message: 'Otp are required' }, { status: 400 })

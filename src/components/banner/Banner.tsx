@@ -2,6 +2,7 @@ import BannerWrapper from './BannerWrapper'
 import BannerContent from './BannerContent'
 import BannerBackgroundEffects from './BannerBackgroundEffects'
 import React from 'react'
+import Image from 'next/image'
 
 interface BannerProps {
   backgroundImage: string // Ajusta este tipo según lo que necesites (puede ser una URL o algún otro formato).
@@ -26,10 +27,12 @@ const Banner: React.FC<BannerProps> = ({
         <div className="relative w-full h-full flex">
           {/* Imagen de fondo */}
           <div className="relative w-[600px] h-full flex-shrink-0 md:block hidden">
-            <img
+            <Image
               src={backgroundImage}
               alt="Persona entrenando"
-              className="absolute top-[-25%] left-0 w-full h-auto object-cover pointer-events-none"
+              layout="fill"
+              objectFit="cover"
+              className="absolute top-[-25%] left-0 w-full h-auto pointer-events-none"
             />
           </div>
 
