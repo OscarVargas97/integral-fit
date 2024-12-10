@@ -2,7 +2,6 @@ import { type NextRequest } from 'next/server'
 import { updateSession } from 'middleware/auth/updateSession'
 import LogOutMiddleware from 'middleware/auth/logoutMiddleware'
 import AuthMiddleWare from 'middleware/auth/authMiddleware'
-import FirstStepsMiddleware from 'middleware/firstStepsMiddleware'
 
 export async function middleware(request: NextRequest) {
   const newSession = await updateSession(request)
@@ -13,9 +12,6 @@ export async function middleware(request: NextRequest) {
 
   const auth = await AuthMiddleWare(newSession, request)
   if (auth) return auth
-
-  const firstSteps = await FirstStepsMiddleware(newSession, request)
-  if (firstSteps) return firstSteps
 
   return response
 }
