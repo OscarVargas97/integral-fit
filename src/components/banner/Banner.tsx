@@ -4,14 +4,20 @@ import BannerBackgroundEffects from './BannerBackgroundEffects'
 import React from 'react'
 import Image from 'next/image'
 
+interface ContentProps {
+  title: string
+  subtitle: string
+}
+
 interface BannerProps {
   backgroundImage: string // Ajusta este tipo según lo que necesites (puede ser una URL o algún otro formato).
   children?: React.ReactNode
-  content?: React.ReactNode
+  content?: ContentProps
   textAlign?: {
-    text: 'left' | 'center' | 'right'
-    vertical: 'top' | 'center' | 'bottom'
+    text: string
+    vertical: string
   }
+  align: { horizontal: string }
 }
 
 const Banner: React.FC<BannerProps> = ({
