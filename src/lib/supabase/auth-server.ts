@@ -1,19 +1,24 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from 'lib/supabase/server'
 
 export async function login(email: string, password: string) {
   const supabase = await createClient()
+  console.log(email, password)
   const data = {
     email,
     password,
   }
+
   try {
-    await supabase.auth.signInWithPassword(data)
+    const { error } = await supabase.auth.signInWithPassword(data)
+    if (error) {
+      throw new Error(error.message || 'Error desconocido al iniciar sesión.')
+    }
   } catch (error) {
-    throw new Error(error.message || 'Error desconocido al iniciar sesión.')
+    console.log(error)
+    throw new Error('Error interno')
   }
 }
 

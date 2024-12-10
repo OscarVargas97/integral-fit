@@ -20,6 +20,5 @@ export async function POST(req: Request) {
       { status: 401 },
     )
   }
-
   return NextResponse.json({ message: 'Login successful' })
 }

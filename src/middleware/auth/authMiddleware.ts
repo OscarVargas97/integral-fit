@@ -25,18 +25,20 @@ const AuthMiddleWare = async (newSession: any, request: NextRequest) => {
       return redirectTo(request, getReturn(state))
     }
   }
+  console.log(request.nextUrl.pathname)
+  console.log('hi')
 }
 
 const getRoutes = (state) => {
   const routes = {
     0: {
-      access: ['/access/login', '/access/register', '/error', '/api/access'],
+      access: ['/access/login', '/access/signup', '/error', '/api/access'],
     },
     1: {
-      notAccess: ['/access/login', '/access/register'],
+      notAccess: ['/access/login', '/access/signup'],
     },
     2: {
-      notAccess: ['/access/login', '/access/register', '/access/2fa'],
+      notAccess: ['/access/login', '/access/signup', '/access/2fa'],
     },
   }
   return routes[state]

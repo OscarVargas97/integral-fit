@@ -14,14 +14,15 @@ export const login = async (e, router) => {
     },
     body: JSON.stringify({ email, password }),
   })
+
   if (response.ok) {
     await animations.default.preTransition()
     router.push('/access/2fa')
     send2fa(e.target.email.value)
     await animations.default.posTransition()
   } else {
-    const { message } = await response.json()
-    console.error('Error during login:', message)
+    console.log(response)
+    return 'Error al iniciar sesión'
   }
 }
 

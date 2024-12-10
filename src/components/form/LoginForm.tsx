@@ -4,15 +4,20 @@ import Link from 'next/link'
 import { Button } from 'components/ui/Button'
 import { Input } from 'components/ui/Input'
 import { Label } from 'components/ui/Label'
-
 import { useRouter } from 'next/navigation'
 import { login } from 'lib/supabase/auth'
+import { useState } from 'react'
 
 const LoginForm = () => {
+  const [error, setError] = useState('')
   const router = useRouter()
   const handleLogin = async (e) => {
+    setError('')
     e.preventDefault()
-    login(e, router)
+    const newError = await login(e, router)
+    if (newError) {
+      setError(newError)
+    }
   }
   return (
     <form onSubmit={handleLogin}>
@@ -36,6 +41,7 @@ const LoginForm = () => {
           </div>
           <Input id="password" name="password" type="password" required />
         </div>
+        {error && <p className="text-red-500">{error}</p>}
         <Button type="submit" className="w-full">
           Login
         </Button>

@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from 'components/ui/Card'
 import LoginForm from 'components/form/LoginForm'
-import SignInWithGoogleButton from 'components/buttons/SignInWithGoogleButton'
 
 const LoginPage = () => {
   return (
@@ -22,7 +21,6 @@ const LoginPage = () => {
         </CardHeader>
         <CardContent>
           <LoginForm />
-          <SignInWithGoogleButton />
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{' '}
             <Link href="/access/signup" className="underline">
