@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "noEmit": true,
     "baseUrl": "./src",
     "target": "ES2017",
     "lib": [
