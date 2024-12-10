@@ -13,9 +13,11 @@ export async function GET(request: NextRequest) {
   if (tokenHash && type) {
     const supabase = await createClient()
 
+    const email = searchParams.get('email')
     const { error } = await supabase.auth.verifyOtp({
       type,
-      tokenHash,
+      token: tokenHash,
+      email: email ?? '',
     })
     if (!error) {
       // redirect user to specified redirect URL or root of app
