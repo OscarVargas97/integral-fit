@@ -6,11 +6,11 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Integral Fit',
-  description: 'Genera el cambio que necesitas en tu vida'
+  description: 'Genera el cambio que necesitas en tu vida',
 }
 
-export default function RootLayout ({
-  children
+export default function RootLayout({
+  children,
 }: Readonly<{
   children: React.ReactNode
 }>) {

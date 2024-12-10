@@ -7,21 +7,22 @@ const BannerContent = ({
   children,
   buttons = [],
   textAlign = { text: 'center', vertical: 'center' },
-  align = { horizontal: 'center' }
+  align = { horizontal: 'center' },
 }) => {
   const horizontalAlignment = {
     left: 'justify-start',
     center: 'justify-center',
-    right: 'justify-end'
+    right: 'justify-end',
   }
 
   const verticalAlignment = {
     top: 'items-start',
     center: 'items-center',
-    bottom: 'items-end'
+    bottom: 'items-end',
   }
 
-  const horizontalClass = horizontalAlignment[align.horizontal] || 'justify-center'
+  const horizontalClass =
+    horizontalAlignment[align.horizontal] || 'justify-center'
   const verticalClass = verticalAlignment[textAlign.vertical] || 'items-center'
 
   return (
