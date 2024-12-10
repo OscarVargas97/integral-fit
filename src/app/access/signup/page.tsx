@@ -8,7 +8,7 @@ import {
 } from 'components/ui/Card'
 import RegisterForm from 'components/form/RegisterForm'
 
-const SingUp = () => {
+const SignUp = () => {
   return (
     <div className="flex h-svh items-center">
       <Card className="mx-auto max-w-sm">
@@ -32,4 +32,4 @@ const SingUp = () => {
   )
 }
 
-export default SingUp
+export default SignUp

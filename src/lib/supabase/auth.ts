@@ -38,7 +38,7 @@ const send2fa = async (email) => {
   return true
 }
 
-export const singUp = async (e, router) => {
+export const signUp = async (e, router) => {
   const { error } = await createClient().auth.signUp({
     email: e.target.email.value,
     password: e.target.password.value,

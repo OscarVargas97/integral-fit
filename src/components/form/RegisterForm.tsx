@@ -4,7 +4,7 @@ import { Button } from 'components/ui/Button'
 import { Input } from 'components/ui/Input'
 import { Label } from 'components/ui/Label'
 import { useRouter } from 'next/navigation'
-import { singUp } from 'lib/supabase/auth'
+import { signUp } from 'lib/supabase/auth'
 import { useState } from 'react'
 
 const RegisterForm = () => {
@@ -29,9 +29,9 @@ const RegisterForm = () => {
     setError('')
 
     try {
-      await singUp(e, router)
+      await signUp(e, router)
     } catch (err) {
-      setError(err.message || 'Algo salió mal, inténtalo de nuevo.')
+      setError((err as Error).message || 'Algo salió mal, inténtalo de nuevo.')
     }
   }
   return (
