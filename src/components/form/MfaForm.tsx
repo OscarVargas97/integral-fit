@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { mfaAuth } from 'lib/supabase/auth'
+import { mfaAuth } from 'utils/supabase/auth'
 
 const MfaForm = () => {
   const router = useRouter()

@@ -5,7 +5,7 @@ import { Button } from 'components/ui/Button'
 import { Input } from 'components/ui/Input'
 import { Label } from 'components/ui/Label'
 import { useRouter } from 'next/navigation'
-import { login } from 'lib/supabase/auth'
+import { login } from 'utils/supabase/auth'
 import { useState } from 'react'
 
 const LoginForm = () => {

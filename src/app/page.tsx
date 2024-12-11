@@ -4,7 +4,7 @@ import Plans from 'components/Plans'
 import Footer from 'components/Footer'
 import ScrollButton from 'components/buttons/ScrollButton'
 import { TransitionLink } from 'components/transitions/TransitionLink'
-import { getUser } from 'lib/supabase/getServerUser'
+import { getUser } from 'utils/supabase/server'
 
 export default async function Home() {
   const user = await getUser()

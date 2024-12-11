@@ -1,6 +1,6 @@
 'use client'
 import { Button } from 'components/ui/Button'
-import { signInWithGoogle } from 'lib/supabase/auth-server'
+import { signInWithGoogle } from 'utils/supabase/auth-server'
 import React from 'react'
 
 const SignInWithGoogleButton = () => {
