@@ -22,6 +22,10 @@ export const TransitionLink: React.FC<TransitionLinkProps> = ({
   href,
   variant,
   size,
+  preFunc = false,
+  animation = 'default',
+  preExtraTime = 0,
+  posExtraTime = 0,
   className,
   ...props
 }) => {
@@ -31,9 +35,15 @@ export const TransitionLink: React.FC<TransitionLinkProps> = ({
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) => {
     e.preventDefault()
-    await animations.default.preTransition()
+    if (preFunc) {
+      await animations[animation].preTransition(preExtraTime)
+    }
     router.push(href)
-    await animations.default.posTransition()
+
+    if (!preFunc) {
+      await animations[animation].preTransition(preExtraTime)
+    }
+    await animations[animation].posTransition(posExtraTime)
   }
 
   return (

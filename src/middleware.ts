@@ -4,11 +4,12 @@ import LogOutMiddleware from 'middleware/auth/logoutMiddleware'
 import AuthMiddleWare from 'middleware/auth/authMiddleware'
 
 export async function middleware(request: NextRequest) {
+  console.log(request.nextUrl.pathname)
   const newSession = await updateSession(request)
   const { response } = newSession
 
-  const logout = await LogOutMiddleware(newSession, request)
-  if (logout) return logout
+  const logout = LogOutMiddleware(newSession, request)
+  if (logout) return await logout
 
   const auth = await AuthMiddleWare(newSession, request)
   if (auth) return auth

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
-import { login } from 'lib/supabase/auth-server'
+import { login } from 'utils/supabase/auth-server'
+import { createEncryptedJWT } from 'utils/cryptoJwt'
 
 export async function POST(req: Request) {
   const body = await req.json()
@@ -20,5 +21,19 @@ export async function POST(req: Request) {
       { status: 401 },
     )
   }
-  return NextResponse.json({ message: 'Login successful' })
+
+  const token = await createEncryptedJWT({
+    email,
+    is_2fa_pending: true,
+    login_at: new Date(),
+  })
+
+  const response = NextResponse.json({ message: 'Login successful' })
+
+  response.headers.append(
+    'Set-Cookie',
+    `2fa_token=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=300`,
+  )
+
+  return response
 }

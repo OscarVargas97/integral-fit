@@ -1,11 +1,6 @@
-import Link from 'next/link'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from 'components/ui/Card'
+import { TransitionLink } from 'components/transitions/TransitionLink'
+
+import { Card, CardContent, CardHeader, CardTitle } from 'components/ui/Card'
 import RegisterForm from 'components/form/RegisterForm'
 
 const SignUp = () => {
@@ -14,17 +9,19 @@ const SignUp = () => {
       <Card className="mx-auto max-w-sm">
         <CardHeader>
           <CardTitle className="text-xl">Sign Up</CardTitle>
-          <CardDescription>
-            Enter your information to create an account
-          </CardDescription>
         </CardHeader>
         <CardContent>
           <RegisterForm />
           <div className="mt-4 text-center text-sm">
             Already have an account?{' '}
-            <Link href="/access/login" className="underline">
+            <TransitionLink
+              preFunc={true}
+              href="/access/login"
+              variant="ghost"
+              className="ml-auto inline-block text-sm underline h-6 px-2 py-1"
+            >
               Sign in
-            </Link>
+            </TransitionLink>
           </div>
         </CardContent>
       </Card>

@@ -1,4 +1,5 @@
 import { redirectTo } from 'middleware/utils'
+import { verifyEncryptedJWT } from 'utils/cryptoJwt'
 
 const AuthMiddleWare = async (newSession: any, request: NextRequest) => {
   const { supabase } = newSession
@@ -6,13 +7,11 @@ const AuthMiddleWare = async (newSession: any, request: NextRequest) => {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const state = getState(user)
+  const state = await getState(newSession, request, user)
   const { access = [], notAccess = [] } = getRoutes(state)
 
   const shouldRedirect = (paths: string[]) =>
     paths.some((path) => request.nextUrl.pathname.startsWith(path))
-
-  console.log(state)
 
   if (request.nextUrl.pathname === '/' && state === 1) {
     return redirectTo(request, getReturn(state))
@@ -25,8 +24,6 @@ const AuthMiddleWare = async (newSession: any, request: NextRequest) => {
       return redirectTo(request, getReturn(state))
     }
   }
-  console.log(request.nextUrl.pathname)
-  console.log('hi')
 }
 
 const getRoutes = (state) => {
@@ -44,10 +41,14 @@ const getRoutes = (state) => {
   return routes[state]
 }
 
-const getState = (user) => {
+const getState = async (newSession, request, user) => {
   if (user) {
-    if (user.user_metadata?.two_factor_enabled) {
-      return 2
+    const token = request.cookies.get('2fa_token')?.value
+    if (token) {
+      const payload = await verifyEncryptedJWT(token)
+      if (!payload?.is_2fa_pending) {
+        return 2
+      }
     }
     return 1
   }
