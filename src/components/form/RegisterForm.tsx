@@ -4,7 +4,7 @@ import { Button } from 'components/ui/Button'
 import { Input } from 'components/ui/Input'
 import { Label } from 'components/ui/Label'
 import { useRouter } from 'next/navigation'
-import { signUp } from 'utils/supabase/auth'
+import { signUp } from 'utils/supabase/auth-client'
 import { useState } from 'react'
 
 const RegisterForm = () => {
