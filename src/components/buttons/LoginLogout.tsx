@@ -4,7 +4,11 @@ import { TransitionLink } from 'components/transitions/TransitionLink'
 
 const LoginLogoutButton = ({ user }) => {
   return (
-    <TransitionLink href={user ? '/logout' : '/access/login'} variant="outline">
+    <TransitionLink
+      preFunc={true}
+      href={user ? '/logout' : '/access/login'}
+      variant="outline"
+    >
       {user ? 'Logout' : 'Login'}
     </TransitionLink>
   )
